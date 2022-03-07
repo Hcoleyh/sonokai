@@ -207,6 +207,32 @@ function! sonokai#get_palette(style) "{{{
           \ 'grey_dim':   ['#5a5e7a',   '240'],
           \ 'none':       ['NONE',      'NONE']
           \ }
+  elseif a:style ==# 'xcode-light'
+    let palette = {
+          \  'black':      ['#262626',   '237'],
+          \  'bg0':        ['#f8f8f8',   '235'],
+          \  'bg1':        ['#e9f0fa',   '236'],
+          \  'bg2':        ['#cdcdcd',   '236'],
+          \  'bg3':        ['#b8d7fe',   '237'],
+          \  'bg4':        ['#5c6873',   '237'],
+          \ 'bg_red':     ['#ff6188',   '203'],
+          \ 'diff_red':   ['#55393d',   '52'],
+          \ 'bg_green':   ['#a9dc76',   '107'],
+          \ 'diff_green': ['#394634',   '22'],
+          \ 'bg_blue':    ['#77d5f0',   '110'],
+          \ 'diff_blue':  ['#354157',   '17'],
+          \ 'diff_yellow':['#4e432f',   '54'],
+          \  'fg':         ['#262626',   '250'],
+          \  'red':        ['#a444a3',   '203'],
+          \  'blue':       ['#7b53b7',   '215'],
+          \  'yellow':     ['#c53725',   '179'],
+          \  'green':      ['#4b7f86',   '107'],
+          \  'orange':     ['#2f7cae',   '110'],
+          \  'purple':     ['#2932d6',   '176'],
+          \ 'grey':        ['#727f8c',   '246'],
+          \ 'grey_dim':   ['#5a5e7a',   '240'],
+          \ 'none':       ['NONE',      'NONE']
+          \ }
   endif
   return palette
 endfunction "}}}
