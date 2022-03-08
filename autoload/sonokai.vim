@@ -214,11 +214,19 @@ function! sonokai#get_palette(style) "{{{
           \  'bg1':        ['#e9f0fa',   '236'],
           \  'bg2':        ['#cdcdcd',   '236'],
           \  'bg3':        ['#b8d7fe',   '237'],
+<<<<<<< HEAD
           \  'bg4':        ['#78a7fe',   '237'],
           \ 'bg_red':     ['#ff6188',   '203'],
           \ 'diff_red':   ['#55393d',   '52'],
           \ 'bg_green':   ['#a9dc76',   '107'],
           \ 'diff_green': ['#b8d7fe',   '22'],
+=======
+          \  'bg4':        ['#5c6873',   '237'],
+          \ 'bg_red':     ['#ff6188',   '203'],
+          \ 'diff_red':   ['#55393d',   '52'],
+          \ 'bg_green':   ['#a9dc76',   '107'],
+          \ 'diff_green': ['#394634',   '22'],
+>>>>>>> 21df744e5a9f9fe7bc47b21f867a6687cfd2e874
           \ 'bg_blue':    ['#77d5f0',   '110'],
           \ 'diff_blue':  ['#354157',   '17'],
           \ 'diff_yellow':['#4e432f',   '54'],
