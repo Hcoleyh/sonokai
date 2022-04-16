@@ -9,6 +9,10 @@
 local configuration = vim.fn['sonokai#get_configuration']()
 local palette = vim.fn['sonokai#get_palette'](configuration.style)
 
+if configuration.transparent_background == 1 then
+  palette.bg1 = palette.none
+end
+
 return {
   normal = {
     a = {bg = palette.bg_blue[1], fg = palette.bg0[1], gui = 'bold'},
