@@ -255,8 +255,11 @@ g:sonokai_transparent_background~
 
 To use transparent background, set this option to `1`.
 
+If you want more ui components to be transparent (for example, status line
+background), set this option to `2`.
+
     Type:               |Number|
-    Available values:   `0`, `1`
+    Available values:   `0`, `1`, `2`
     Default value:      `0`
 
 ------------------------------------------------------------------------------
@@ -411,6 +414,21 @@ Enabling this option will reduce loading time by approximately 50%.
     Available values:   `0`, `1`
     Default value:      `0`
 
+------------------------------------------------------------------------------
+                                                     *g:sonokai_colors_override*
+g:sonokai_colors_override~
+
+Override color palette. The available keys can be found in
+`/path/to/sonokai/autoload/sonokai.vim`.
+
+E.g.
+>
+    let g:sonokai_colors_override = {'bg0': ['#1e222a', '235'], 'bg2': ['#282c34', '236']}
+    colorscheme sonokai
+<
+    Type:               |Dictionary|
+    Default value:      `{}`
+
 ==============================================================================
 FAQ                                                                *sonokai-faq*
 
@@ -446,7 +464,7 @@ Check [sainnhe/gruvbox-material#60](https://github.com/sainnhe/gruvbox-material/
 
 How to enable cursive italic keywords?~
 
-1. Install a font that supports cursive italics, for example [icursive-nerd-font](https://github.com/sainnhe/icursive-nerd-font).
+1. Install a font that supports cursive italics, for example https://www.sainnhe.dev/post/patch-fonts-with-cursive-italic-styles/
 
 2. Enable italic keywords in this color scheme: `let g:sonokai_enable_italic = 1`
 
@@ -470,8 +488,9 @@ How to use custom colors?~
       highlight! link groupC groupD
     
       " Initialize the color palette.
-      " The parameter is a valid value for `g:sonokai_style`,
-      let l:palette = sonokai#get_palette('atlantis')
+      " The first parameter is a valid value for `g:sonokai_style`,
+      " and the second parameter is a valid value for `g:sonokai_colors_override`.
+      let l:palette = sonokai#get_palette('atlantis', {})
       " Define a highlight group.
       " The first parameter is the name of a highlight group,
       " the second parameter is the foreground color,
@@ -501,7 +520,7 @@ See this [article](https://www.sainnhe.dev/post/status-line-config/).
 
 What's the font used here?~
 
-[Fira Code iCursive Op](https://github.com/sainnhe/icursive-nerd-font).
+See https://www.sainnhe.dev/post/patch-fonts-with-cursive-italic-styles/
 
 ==============================================================================
 vim:tw=78:nosta:noet:ts=8:sts=0:ft=help:et:sw=4:fen:fdm=marker:fmr={{{,}}}:

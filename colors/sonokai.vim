@@ -8,9 +8,9 @@
 
 " Initialization: {{{
 let s:configuration = sonokai#get_configuration()
-let s:palette = sonokai#get_palette(s:configuration.style)
+let s:palette = sonokai#get_palette(s:configuration.style, s:configuration.colors_override)
 let s:path = expand('<sfile>:p') " the path of this script
-let s:last_modified = 'Mon Apr  4 01:48:39 UTC 2022'
+let s:last_modified = 'Sun Jun 12 10:58:01 UTC 2022'
 let g:sonokai_loaded_file_types = []
 
 if !(exists('g:colors_name') && g:colors_name ==# 'sonokai' && s:configuration.better_performance)
@@ -28,7 +28,7 @@ endif
 " }}}
 " Common Highlight Groups: {{{
 " UI: {{{
-if s:configuration.transparent_background
+if s:configuration.transparent_background == 1
   call sonokai#highlight('Normal', s:palette.fg, s:palette.none)
   call sonokai#highlight('Terminal', s:palette.fg, s:palette.none)
   if s:configuration.show_eob
@@ -103,6 +103,7 @@ endif
 highlight! link WildMenu PmenuSel
 call sonokai#highlight('PmenuThumb', s:palette.none, s:palette.grey)
 call sonokai#highlight('NormalFloat', s:palette.fg, s:palette.bg2)
+call sonokai#highlight('FloatBorder', s:palette.grey, s:palette.bg2)
 call sonokai#highlight('Question', s:palette.yellow, s:palette.none)
 if s:configuration.spell_foreground ==# 'none'
   call sonokai#highlight('SpellBad', s:palette.none, s:palette.none, 'undercurl', s:palette.red)
@@ -115,13 +116,23 @@ else
   call sonokai#highlight('SpellLocal', s:palette.blue, s:palette.none, 'undercurl', s:palette.blue)
   call sonokai#highlight('SpellRare', s:palette.purple, s:palette.none, 'undercurl', s:palette.purple)
 endif
-call sonokai#highlight('StatusLine', s:palette.fg, s:palette.bg3)
-call sonokai#highlight('StatusLineTerm', s:palette.fg, s:palette.bg3)
-call sonokai#highlight('StatusLineNC', s:palette.grey, s:palette.bg1)
-call sonokai#highlight('StatusLineTermNC', s:palette.grey, s:palette.bg1)
-call sonokai#highlight('TabLine', s:palette.fg, s:palette.bg4)
-call sonokai#highlight('TabLineFill', s:palette.grey, s:palette.bg1)
-call sonokai#highlight('TabLineSel', s:palette.bg0, s:palette.bg_red)
+if s:configuration.transparent_background == 2
+  call sonokai#highlight('StatusLine', s:palette.fg, s:palette.none)
+  call sonokai#highlight('StatusLineTerm', s:palette.fg, s:palette.none)
+  call sonokai#highlight('StatusLineNC', s:palette.grey, s:palette.none)
+  call sonokai#highlight('StatusLineTermNC', s:palette.grey, s:palette.none)
+  call sonokai#highlight('TabLine', s:palette.fg, s:palette.bg4)
+  call sonokai#highlight('TabLineFill', s:palette.grey, s:palette.none)
+  call sonokai#highlight('TabLineSel', s:palette.bg0, s:palette.bg_red)
+else
+  call sonokai#highlight('StatusLine', s:palette.fg, s:palette.bg3)
+  call sonokai#highlight('StatusLineTerm', s:palette.fg, s:palette.bg3)
+  call sonokai#highlight('StatusLineNC', s:palette.grey, s:palette.bg1)
+  call sonokai#highlight('StatusLineTermNC', s:palette.grey, s:palette.bg1)
+  call sonokai#highlight('TabLine', s:palette.fg, s:palette.bg4)
+  call sonokai#highlight('TabLineFill', s:palette.grey, s:palette.bg1)
+  call sonokai#highlight('TabLineSel', s:palette.bg0, s:palette.bg_red)
+endif
 call sonokai#highlight('VertSplit', s:palette.black, s:palette.none)
 call sonokai#highlight('Visual', s:palette.none, s:palette.bg3)
 call sonokai#highlight('VisualNOS', s:palette.none, s:palette.bg3, 'underline')
@@ -175,6 +186,9 @@ if has('nvim')
   highlight! link LspReferenceText CurrentWord
   highlight! link LspReferenceRead CurrentWord
   highlight! link LspReferenceWrite CurrentWord
+  highlight! link LspCodeLens VirtualTextInfo
+  highlight! link LspCodeLensSeparator VirtualTextHint
+  highlight! link LspSignatureActiveParameter Search
   highlight! link TermCursor Cursor
   highlight! link healthError Red
   highlight! link healthSuccess Green
@@ -389,6 +403,7 @@ highlight! link TSPunctBracket Grey
 highlight! link TSPunctDelimiter Grey
 highlight! link TSPunctSpecial Yellow
 highlight! link TSRepeat Red
+highlight! link TSStorageClass Red
 highlight! link TSString Yellow
 highlight! link TSStringEscape Green
 highlight! link TSStringRegex Green
@@ -407,6 +422,12 @@ highlight! link TSVariableBuiltin OrangeItalic
 " }}}
 " neoclide/coc.nvim {{{
 call sonokai#highlight('CocHoverRange', s:palette.none, s:palette.none, 'bold,underline')
+call sonokai#highlight('CocSearch', s:palette.green, s:palette.none, 'bold')
+highlight! link CocDisabled Grey
+highlight! link CocSnippetVisual DiffAdd
+highlight! link CocInlayHint Grey
+highlight! link CocNotificationProgress Green
+highlight! link CocNotificationButton PmenuSel
 highlight! link CocSemClass TSType
 highlight! link CocSemEnum TSType
 highlight! link CocSemInterface TSType
@@ -658,10 +679,11 @@ highlight! link multiple_cursors_cursor Cursor
 highlight! link multiple_cursors_visual Visual
 " }}}
 " mg979/vim-visual-multi {{{
-let g:VM_Mono_hl = 'Cursor'
+call sonokai#highlight('VMCursor', s:palette.blue, s:palette.grey_dim)
+let g:VM_Mono_hl = 'VMCursor'
 let g:VM_Extend_hl = 'Visual'
-let g:VM_Cursor_hl = 'Cursor'
-let g:VM_Insert_hl = 'Cursor'
+let g:VM_Cursor_hl = 'VMCursor'
+let g:VM_Insert_hl = 'VMCursor'
 " }}}
 " dominikduda/vim_current_word {{{
 highlight! link CurrentWordTwins CurrentWord
@@ -950,6 +972,24 @@ highlight! link plugUpdate Blue
 highlight! link plugDeleted Grey
 highlight! link plugEdge Purple
 " syn_end }}}
+" syn_begin: packer {{{
+" https://github.com/wbthomason/packer.nvim
+highlight! link packerSuccess Green
+highlight! link packerFail Red
+highlight! link packerStatusSuccess Fg
+highlight! link packerStatusFail Fg
+highlight! link packerWorking Yellow
+highlight! link packerString Yellow
+highlight! link packerPackageNotLoaded Grey
+highlight! link packerRelDate Grey
+highlight! link packerPackageName Blue
+highlight! link packerOutput Orange
+highlight! link packerHash Blue
+highlight! link packerTimeTrivial Blue
+highlight! link packerTimeHigh Red
+highlight! link packerTimeMedium Yellow
+highlight! link packerTimeLow Green
+" syn_end }}}
 " syn_begin: coctree {{{
 " https://github.com/neoclide/coc.nvim
 highlight! link CocTreeOpenClose Purple
@@ -1051,6 +1091,37 @@ highlight! link VistaPublic Green
 highlight! link VistaProtected Yellow
 highlight! link VistaPrivate Red
 " syn_end }}}
+" syn_begin: aerial {{{
+" https://github.com/stevearc/aerial.nvim
+highlight! link AerialLine CursorLine
+highlight! link AerialGuide LineNr
+highlight! link AerialFileIcon Green
+highlight! link AerialModuleIcon Red
+highlight! link AerialNamespaceIcon Red
+highlight! link AerialPackageIcon Red
+highlight! link AerialClassIcon Blue
+highlight! link AerialMethodIcon Green
+highlight! link AerialPropertyIcon Orange
+highlight! link AerialFieldIcon Green
+highlight! link AerialConstructorIcon Green
+highlight! link AerialEnumIcon Blue
+highlight! link AerialInterfaceIcon Blue
+highlight! link AerialFunctionIcon Green
+highlight! link AerialVariableIcon Orange
+highlight! link AerialConstantIcon Orange
+highlight! link AerialStringIcon Yellow
+highlight! link AerialNumberIcon Yellow
+highlight! link AerialBooleanIcon Yellow
+highlight! link AerialArrayIcon Yellow
+highlight! link AerialObjectIcon Yellow
+highlight! link AerialKeyIcon Red
+highlight! link AerialNullIcon Yellow
+highlight! link AerialEnumMemberIcon Orange
+highlight! link AerialStructIcon Blue
+highlight! link AerialEventIcon Yellow
+highlight! link AerialOperatorIcon Yellow
+highlight! link AerialTypeParameterIcon Blue
+" syn_end }}}
 " syn_begin: nerdtree {{{
 " https://github.com/preservim/nerdtree
 highlight! link NERDTreeDir Green
@@ -1100,7 +1171,7 @@ highlight! link NvimTreeLspDiagnosticsHint GreenSign
 " syn_end }}}
 " syn_begin: fern {{{
 " https://github.com/lambdalisue/fern.vim
-highlight! link FernMarkedLine None
+highlight! link FernMarkedLine Purple
 highlight! link FernMarkedText Purple
 highlight! link FernRootSymbol FernRootText
 highlight! link FernRootText Blue

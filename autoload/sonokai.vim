@@ -9,6 +9,7 @@
 function! sonokai#get_configuration() "{{{
   return {
         \ 'style': get(g:, 'sonokai_style', 'default'),
+        \ 'colors_override': get(g:, 'sonokai_colors_override', {}),
         \ 'transparent_background': get(g:, 'sonokai_transparent_background', 0),
         \ 'disable_italic_comment': get(g:, 'sonokai_disable_italic_comment', 0),
         \ 'enable_italic': get(g:, 'sonokai_enable_italic', 0),
@@ -25,7 +26,7 @@ function! sonokai#get_configuration() "{{{
         \ 'better_performance': get(g:, 'sonokai_better_performance', 0),
         \ }
 endfunction "}}}
-function! sonokai#get_palette(style) "{{{
+function! sonokai#get_palette(style, colors_override) "{{{
   if a:style ==# 'default'
     let palette = {
           \ 'black':      ['#181819',   '237'],
@@ -235,7 +236,7 @@ function! sonokai#get_palette(style) "{{{
           \ 'none':       ['NONE',      'NONE']
           \ }
   endif
-  return palette
+  return extend(palette, a:colors_override)
 endfunction "}}}
 function! sonokai#highlight(group, fg, bg, ...) "{{{
   execute 'highlight' a:group
@@ -300,7 +301,7 @@ function! sonokai#syn_write(rootpath, syn, content) "{{{
   if matchstr(a:content, 'sonokai#highlight') !=# ''
     call writefile([
           \ 'let s:configuration = sonokai#get_configuration()',
-          \ 'let s:palette = sonokai#get_palette(s:configuration.style)'
+          \ 'let s:palette = sonokai#get_palette(s:configuration.style, s:configuration.colors_override)'
           \ ], syn_path, 'a')
   endif
   " Append the content.
