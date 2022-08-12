@@ -1,7 +1,7 @@
 " -----------------------------------------------------------------------------
 " Name:         Sonokai
 " Description:  High Contrast & Vivid Color Scheme based on Monokai Pro
-" Author:       Sainnhepark <sainnhe@gmail.com>
+" Author:       Sainnhepark <i@sainnhe.dev>
 " Website:      https://github.com/sainnhe/sonokai/
 " License:      MIT
 " -----------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 let s:configuration = sonokai#get_configuration()
 let s:palette = sonokai#get_palette(s:configuration.style, s:configuration.colors_override)
 let s:path = expand('<sfile>:p') " the path of this script
-let s:last_modified = 'Sun Jun 12 10:58:01 UTC 2022'
+let s:last_modified = 'Thu Aug  4 02:23:40 UTC 2022'
 let g:sonokai_loaded_file_types = []
 
 if !(exists('g:colors_name') && g:colors_name ==# 'sonokai' && s:configuration.better_performance)
@@ -28,7 +28,7 @@ endif
 " }}}
 " Common Highlight Groups: {{{
 " UI: {{{
-if s:configuration.transparent_background == 1
+if s:configuration.transparent_background >= 1
   call sonokai#highlight('Normal', s:palette.fg, s:palette.none)
   call sonokai#highlight('Terminal', s:palette.fg, s:palette.none)
   if s:configuration.show_eob
@@ -143,6 +143,7 @@ call sonokai#highlight('debugBreakpoint', s:palette.bg0, s:palette.red)
 call sonokai#highlight('ToolbarButton', s:palette.bg0, s:palette.bg_blue)
 if has('nvim')
   call sonokai#highlight('Substitute', s:palette.bg0, s:palette.yellow)
+  highlight! link WinBarNC Grey
   highlight! link DiagnosticFloatingError ErrorFloat
   highlight! link DiagnosticFloatingWarn WarningFloat
   highlight! link DiagnosticFloatingInfo InfoFloat
@@ -423,6 +424,14 @@ highlight! link TSVariableBuiltin OrangeItalic
 " neoclide/coc.nvim {{{
 call sonokai#highlight('CocHoverRange', s:palette.none, s:palette.none, 'bold,underline')
 call sonokai#highlight('CocSearch', s:palette.green, s:palette.none, 'bold')
+call sonokai#highlight('CocPumSearch', s:palette.green, s:palette.none, 'bold')
+call sonokai#highlight('CocMarkdownHeader', s:palette.blue, s:palette.none, 'bold')
+call sonokai#highlight('CocMarkdownLink', s:palette.green, s:palette.none, 'underline')
+highlight! link CocMarkdownCode Green
+highlight! link CocPumShortcut Grey
+highlight! link CocPumVirtualText LineNr
+highlight! link CocPumMenu Pmenu
+highlight! link CocMenuSel PmenuSel
 highlight! link CocDisabled Grey
 highlight! link CocSnippetVisual DiffAdd
 highlight! link CocInlayHint Grey
@@ -441,6 +450,7 @@ highlight! link CocErrorFloat ErrorFloat
 highlight! link CocWarningFloat WarningFloat
 highlight! link CocInfoFloat InfoFloat
 highlight! link CocHintFloat HintFloat
+highlight! link CocFloatDividingLine Grey
 highlight! link CocErrorHighlight ErrorText
 highlight! link CocWarningHighlight WarningText
 highlight! link CocInfoHighlight InfoText
@@ -921,6 +931,59 @@ highlight! link ReferencesCount Grey
 highlight! link DefinitionCount Grey
 highlight! link TargetFileName Grey
 " }}}
+" b0o/incline.nvim {{{
+call sonokai#highlight('InclineNormalNC', s:palette.grey, s:palette.bg2)
+" }}}
+" echasnovski/mini.nvim {{{
+call sonokai#highlight('MiniIndentscopePrefix', s:palette.none, s:palette.none, 'nocombine')
+call sonokai#highlight('MiniJump2dSpot', s:palette.red, s:palette.none, 'bold,nocombine')
+call sonokai#highlight('MiniStarterCurrent', s:palette.none, s:palette.none, 'nocombine')
+call sonokai#highlight('MiniStatuslineDevinfo', s:palette.fg, s:palette.bg3)
+call sonokai#highlight('MiniStatuslineFileinfo', s:palette.fg, s:palette.bg3)
+call sonokai#highlight('MiniStatuslineFilename', s:palette.grey, s:palette.bg1)
+call sonokai#highlight('MiniStatuslineModeInactive', s:palette.grey, s:palette.bg1)
+call sonokai#highlight('MiniStatuslineModeCommand', s:palette.bg0, s:palette.yellow, 'bold')
+call sonokai#highlight('MiniStatuslineModeInsert', s:palette.bg0, s:palette.bg_green, 'bold')
+call sonokai#highlight('MiniStatuslineModeNormal', s:palette.bg0, s:palette.bg_blue, 'bold')
+call sonokai#highlight('MiniStatuslineModeOther', s:palette.bg0, s:palette.purple, 'bold')
+call sonokai#highlight('MiniStatuslineModeReplace', s:palette.bg0, s:palette.orange, 'bold')
+call sonokai#highlight('MiniStatuslineModeVisual', s:palette.bg0, s:palette.bg_red, 'bold')
+call sonokai#highlight('MiniTablineCurrent', s:palette.fg, s:palette.bg4)
+call sonokai#highlight('MiniTablineHidden', s:palette.grey, s:palette.bg2)
+call sonokai#highlight('MiniTablineModifiedCurrent', s:palette.blue, s:palette.bg4)
+call sonokai#highlight('MiniTablineModifiedHidden', s:palette.grey, s:palette.bg2)
+call sonokai#highlight('MiniTablineModifiedVisible', s:palette.blue, s:palette.bg2)
+call sonokai#highlight('MiniTablineTabpagesection', s:palette.bg0, s:palette.blue, 'bold')
+call sonokai#highlight('MiniTablineVisible', s:palette.fg, s:palette.bg2)
+call sonokai#highlight('MiniTestEmphasis', s:palette.none, s:palette.none, 'bold')
+call sonokai#highlight('MiniTestFail', s:palette.red, s:palette.none, 'bold')
+call sonokai#highlight('MiniTestPass', s:palette.green, s:palette.none, 'bold')
+call sonokai#highlight('MiniTrailspace', s:palette.none, s:palette.red)
+highlight! link MiniStarterItemBullet Grey
+highlight! link MiniStarterItemPrefix Yellow
+highlight! link MiniStarterQuery Blue
+highlight! link MiniCompletionActiveParameter LspSignatureActiveParameter
+highlight! link MiniCursorword CurrentWord
+highlight! link MiniCursorwordCurrent CurrentWord
+highlight! link MiniIndentscopeSymbol Grey
+highlight! link MiniJump Search
+highlight! link MiniStarterFooter Yellow
+highlight! link MiniStarterHeader Purple
+highlight! link MiniStarterInactive Comment
+highlight! link MiniStarterItem Normal
+highlight! link MiniStarterSection Title
+highlight! link MiniSurround IncSearch
+highlight! link MiniTablineFill TabLineFill
+" }}}
+" ggandor/lightspeed.nvim {{{
+call sonokai#highlight('LightspeedLabel', s:palette.red, s:palette.none, 'bold,underline')
+call sonokai#highlight('LightspeedLabelDistant', s:palette.blue, s:palette.none, 'bold,underline')
+call sonokai#highlight('LightspeedShortcut', s:palette.bg0, s:palette.red, 'bold')
+call sonokai#highlight('LightspeedUnlabeledMatch', s:palette.fg, s:palette.none, 'bold')
+call sonokai#highlight('LightspeedPendingOpArea', s:palette.bg0, s:palette.green)
+highlight! link LightspeedMaskedChar Purple
+highlight! link LightspeedGreyWash Grey
+" }}}
 endif
 " }}}
 " Extended File Types: {{{
@@ -1091,6 +1154,10 @@ highlight! link VistaPublic Green
 highlight! link VistaProtected Yellow
 highlight! link VistaPrivate Red
 " syn_end }}}
+" syn_begin: Outline {{{
+" https://github.com/simrat39/symbols-outline.nvim
+highlight! link FocusedSymbol NormalFloat
+" syn_end }}}
 " syn_begin: aerial {{{
 " https://github.com/stevearc/aerial.nvim
 highlight! link AerialLine CursorLine
@@ -1181,6 +1248,34 @@ highlight! link FernBranchSymbol FernBranchText
 highlight! link FernBranchText Green
 highlight! link FernWindowSelectIndicator TabLineSel
 highlight! link FernWindowSelectStatusLine TabLine
+" syn_end }}}
+" syn_begin: octo {{{
+" https://github.com/pwntester/octo.nvim
+call sonokai#highlight('OctoViewer', s:palette.bg0, s:palette.blue)
+call sonokai#highlight('OctoGreenFloat', s:palette.green, s:palette.bg2)
+call sonokai#highlight('OctoRedFloat', s:palette.red, s:palette.bg2)
+call sonokai#highlight('OctoPurpleFloat', s:palette.purple, s:palette.bg2)
+call sonokai#highlight('OctoYellowFloat', s:palette.yellow, s:palette.bg2)
+call sonokai#highlight('OctoBlueFloat', s:palette.blue, s:palette.bg2)
+call sonokai#highlight('OctoGreyFloat', s:palette.grey, s:palette.bg2)
+call sonokai#highlight('OctoBubbleGreen', s:palette.bg0, s:palette.green)
+call sonokai#highlight('OctoBubbleRed', s:palette.bg0, s:palette.red)
+call sonokai#highlight('OctoBubblePurple', s:palette.bg0, s:palette.purple)
+call sonokai#highlight('OctoBubbleYellow', s:palette.bg0, s:palette.yellow)
+call sonokai#highlight('OctoBubbleBlue', s:palette.bg0, s:palette.blue)
+call sonokai#highlight('OctoBubbleGrey', s:palette.bg0, s:palette.grey)
+highlight! link OctoGreen Green
+highlight! link OctoRed Red
+highlight! link OctoPurple Purple
+highlight! link OctoYellow Yellow
+highlight! link OctoBlue Blue
+highlight! link OctoGrey Grey
+highlight! link OctoBubbleDelimiterGreen Green
+highlight! link OctoBubbleDelimiterRed Red
+highlight! link OctoBubbleDelimiterPurple Purple
+highlight! link OctoBubbleDelimiterYellow Yellow
+highlight! link OctoBubbleDelimiterBlue Blue
+highlight! link OctoBubbleDelimiterGrey Grey
 " syn_end }}}
 " syn_begin: netrw {{{
 " https://www.vim.org/scripts/script.php?script_id=1075
