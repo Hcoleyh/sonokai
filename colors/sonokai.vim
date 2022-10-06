@@ -10,7 +10,7 @@
 let s:configuration = sonokai#get_configuration()
 let s:palette = sonokai#get_palette(s:configuration.style, s:configuration.colors_override)
 let s:path = expand('<sfile>:p') " the path of this script
-let s:last_modified = 'Thu Aug  4 02:23:40 UTC 2022'
+let s:last_modified = 'Fri Sep  9 13:50:03 UTC 2022'
 let g:sonokai_loaded_file_types = []
 
 if !(exists('g:colors_name') && g:colors_name ==# 'sonokai' && s:configuration.better_performance)
@@ -134,6 +134,7 @@ else
   call sonokai#highlight('TabLineSel', s:palette.bg0, s:palette.bg_red)
 endif
 call sonokai#highlight('VertSplit', s:palette.black, s:palette.none)
+highlight! link WinSeparator VertSplit
 call sonokai#highlight('Visual', s:palette.none, s:palette.bg3)
 call sonokai#highlight('VisualNOS', s:palette.none, s:palette.bg3, 'underline')
 call sonokai#highlight('QuickFixLine', s:palette.blue, s:palette.none, 'bold')
@@ -164,26 +165,26 @@ if has('nvim')
   highlight! link DiagnosticSignWarn YellowSign
   highlight! link DiagnosticSignInfo BlueSign
   highlight! link DiagnosticSignHint GreenSign
-  highlight! link LspDiagnosticsFloatingError ErrorFloat
-  highlight! link LspDiagnosticsFloatingWarning WarningFloat
-  highlight! link LspDiagnosticsFloatingInformation InfoFloat
-  highlight! link LspDiagnosticsFloatingHint HintFloat
-  highlight! link LspDiagnosticsDefaultError ErrorText
-  highlight! link LspDiagnosticsDefaultWarning WarningText
-  highlight! link LspDiagnosticsDefaultInformation InfoText
-  highlight! link LspDiagnosticsDefaultHint HintText
-  highlight! link LspDiagnosticsVirtualTextError VirtualTextError
-  highlight! link LspDiagnosticsVirtualTextWarning VirtualTextWarning
-  highlight! link LspDiagnosticsVirtualTextInformation VirtualTextInfo
-  highlight! link LspDiagnosticsVirtualTextHint VirtualTextHint
-  highlight! link LspDiagnosticsUnderlineError ErrorText
-  highlight! link LspDiagnosticsUnderlineWarning WarningText
-  highlight! link LspDiagnosticsUnderlineInformation InfoText
-  highlight! link LspDiagnosticsUnderlineHint HintText
-  highlight! link LspDiagnosticsSignError RedSign
-  highlight! link LspDiagnosticsSignWarning YellowSign
-  highlight! link LspDiagnosticsSignInformation BlueSign
-  highlight! link LspDiagnosticsSignHint GreenSign
+  highlight! link LspDiagnosticsFloatingError DiagnosticFloatingError
+  highlight! link LspDiagnosticsFloatingWarning DiagnosticFloatingWarn
+  highlight! link LspDiagnosticsFloatingInformation DiagnosticFloatingInfo
+  highlight! link LspDiagnosticsFloatingHint DiagnosticFloatingHint
+  highlight! link LspDiagnosticsDefaultError DiagnosticError
+  highlight! link LspDiagnosticsDefaultWarning DiagnosticWarn
+  highlight! link LspDiagnosticsDefaultInformation DiagnosticInfo
+  highlight! link LspDiagnosticsDefaultHint DiagnosticHint
+  highlight! link LspDiagnosticsVirtualTextError DiagnosticVirtualTextError
+  highlight! link LspDiagnosticsVirtualTextWarning DiagnosticVirtualTextWarn
+  highlight! link LspDiagnosticsVirtualTextInformation DiagnosticVirtualTextInfo
+  highlight! link LspDiagnosticsVirtualTextHint DiagnosticVirtualTextHint
+  highlight! link LspDiagnosticsUnderlineError DiagnosticUnderlineError
+  highlight! link LspDiagnosticsUnderlineWarning DiagnosticUnderlineWarn
+  highlight! link LspDiagnosticsUnderlineInformation DiagnosticUnderlineInfo
+  highlight! link LspDiagnosticsUnderlineHint DiagnosticUnderlineHint
+  highlight! link LspDiagnosticsSignError DiagnosticSignError
+  highlight! link LspDiagnosticsSignWarning DiagnosticSignWarn
+  highlight! link LspDiagnosticsSignInformation DiagnosticSignInfo
+  highlight! link LspDiagnosticsSignHint DiagnosticSignHint
   highlight! link LspReferenceText CurrentWord
   highlight! link LspReferenceRead CurrentWord
   highlight! link LspReferenceWrite CurrentWord
@@ -408,7 +409,6 @@ highlight! link TSStorageClass Red
 highlight! link TSString Yellow
 highlight! link TSStringEscape Green
 highlight! link TSStringRegex Green
-highlight! link TSStructure OrangeItalic
 highlight! link TSSymbol Fg
 highlight! link TSTag BlueItalic
 highlight! link TSTagDelimiter Red
@@ -420,6 +420,56 @@ highlight! link TSTypeBuiltin BlueItalic
 highlight! link TSURI markdownUrl
 highlight! link TSVariable Fg
 highlight! link TSVariableBuiltin OrangeItalic
+if has('nvim-0.8.0')
+  highlight! link @annotation TSAnnotation
+  highlight! link @attribute TSAttribute
+  highlight! link @boolean TSBoolean
+  highlight! link @character TSCharacter
+  highlight! link @comment TSComment
+  highlight! link @conditional TSConditional
+  highlight! link @constant TSConstant
+  highlight! link @constant.builtin TSConstBuiltin
+  highlight! link @constant.macro TSConstMacro
+  highlight! link @constructor TSConstructor
+  highlight! link @exception TSException
+  highlight! link @field TSField
+  highlight! link @float TSFloat
+  highlight! link @function TSFunction
+  highlight! link @function.builtin TSFuncBuiltin
+  highlight! link @function.macro TSFuncMacro
+  highlight! link @include TSInclude
+  highlight! link @keyword TSKeyword
+  highlight! link @keyword.function TSKeywordFunction
+  highlight! link @keyword.operator TSKeywordOperator
+  highlight! link @label TSLabel
+  highlight! link @method TSMethod
+  highlight! link @namespace TSNamespace
+  highlight! link @none TSNone
+  highlight! link @number TSNumber
+  highlight! link @operator TSOperator
+  highlight! link @parameter TSParameter
+  highlight! link @parameter.reference TSParameterReference
+  highlight! link @property TSProperty
+  highlight! link @punctuation.bracket TSPunctBracket
+  highlight! link @punctuation.delimiter TSPunctDelimiter
+  highlight! link @punctuation.special TSPunctSpecial
+  highlight! link @repeat TSRepeat
+  highlight! link @storageclass TSStorageClass
+  highlight! link @string TSString
+  highlight! link @string.escape TSStringEscape
+  highlight! link @string.regex TSStringRegex
+  highlight! link @symbol TSSymbol
+  highlight! link @tag TSTag
+  highlight! link @tag.delimiter TSTagDelimiter
+  highlight! link @text TSText
+  highlight! link @strike TSStrike
+  highlight! link @math TSMath
+  highlight! link @type TSType
+  highlight! link @type.builtin TSTypeBuiltin
+  highlight! link @uri TSURI
+  highlight! link @variable TSVariable
+  highlight! link @variable.builtin TSVariableBuiltin
+endif
 " }}}
 " neoclide/coc.nvim {{{
 call sonokai#highlight('CocHoverRange', s:palette.none, s:palette.none, 'bold,underline')
@@ -429,12 +479,12 @@ call sonokai#highlight('CocMarkdownHeader', s:palette.blue, s:palette.none, 'bol
 call sonokai#highlight('CocMarkdownLink', s:palette.green, s:palette.none, 'underline')
 highlight! link CocMarkdownCode Green
 highlight! link CocPumShortcut Grey
-highlight! link CocPumVirtualText LineNr
+highlight! link CocPumVirtualText Grey
 highlight! link CocPumMenu Pmenu
 highlight! link CocMenuSel PmenuSel
 highlight! link CocDisabled Grey
 highlight! link CocSnippetVisual DiffAdd
-highlight! link CocInlayHint Grey
+highlight! link CocInlayHint LineNr
 highlight! link CocNotificationProgress Green
 highlight! link CocNotificationButton PmenuSel
 highlight! link CocSemClass TSType
@@ -494,6 +544,28 @@ highlight! link LspWarningHighlight WarningText
 highlight! link LspInformationHighlight InfoText
 highlight! link LspHintHighlight HintText
 highlight! link lspReference CurrentWord
+highlight! link lspInlayHintsType LineNr
+highlight! link lspInlayHintsParameter LineNr
+highlight! link LspSemanticType TSType
+highlight! link LspSemanticClass TSType
+highlight! link LspSemanticEnum TSType
+highlight! link LspSemanticInterface TSType
+highlight! link LspSemanticStruct TSType
+highlight! link LspSemanticTypeParameter TSType
+highlight! link LspSemanticParameter TSParameter
+highlight! link LspSemanticVariable TSVariable
+highlight! link LspSemanticProperty TSProperty
+highlight! link LspSemanticEnumMember TSVariableBuiltin
+highlight! link LspSemanticEvents TSLabel
+highlight! link LspSemanticFunction TSFunction
+highlight! link LspSemanticMethod TSMethod
+highlight! link LspSemanticKeyword TSKeyword
+highlight! link LspSemanticModifier TSOperator
+highlight! link LspSemanticComment TSComment
+highlight! link LspSemanticString TSString
+highlight! link LspSemanticNumber TSNumber
+highlight! link LspSemanticRegexp TSStringRegex
+highlight! link LspSemanticOperator TSOperator
 " }}}
 " ycm-core/YouCompleteMe {{{
 highlight! link YcmErrorSign RedSign
@@ -502,6 +574,28 @@ highlight! link YcmErrorLine ErrorLine
 highlight! link YcmWarningLine WarningLine
 highlight! link YcmErrorSection ErrorText
 highlight! link YcmWarningSection WarningText
+highlight! link YcmInlayHint LineNr
+if !has('nvim') && has('textprop') && !exists('g:YCM_HIGHLIGHT_GROUP')
+  let g:YCM_HIGHLIGHT_GROUP = {
+        \ 'typeParameter': 'TSType',
+        \ 'parameter': 'TSParameter',
+        \ 'variable': 'TSVariable',
+        \ 'property': 'TSProperty',
+        \ 'enumMember': 'TSVariableBuiltin',
+        \ 'event': 'TSLabel',
+        \ 'member': 'TSVariable',
+        \ 'method': 'TSMethod',
+        \ 'class': 'TSType',
+        \ 'namespace': 'TSNamespace',
+        \ }
+  for tokenType in keys( g:YCM_HIGHLIGHT_GROUP )
+    try
+      call prop_type_add( 'YCM_HL_' . tokenType,
+            \ { 'highlight': g:YCM_HIGHLIGHT_GROUP[ tokenType ] } )
+    catch
+    endtry
+  endfor
+endif
 " }}}
 " dense-analysis/ale {{{
 highlight! link ALEError ErrorText
@@ -700,6 +794,9 @@ highlight! link CurrentWordTwins CurrentWord
 " }}}
 " RRethy/vim-illuminate {{{
 highlight! link illuminatedWord CurrentWord
+highlight! link IlluminatedWordText CurrentWord
+highlight! link IlluminatedWordRead CurrentWord
+highlight! link IlluminatedWordWrite CurrentWord
 " }}}
 " itchyny/vim-cursorword {{{
 highlight! link CursorWord0 CurrentWord
@@ -772,12 +869,18 @@ highlight! link agitAuthor Yellow
 " voldikss/vim-floaterm {{{
 highlight! link FloatermBorder Grey
 " }}}
+" MattesGroeger/vim-bookmarks {{{
+highlight! link BookmarkSign BlueSign
+highlight! link BookmarkAnnotationSign GreenSign
+highlight! link BookmarkLine DiffChange
+highlight! link BookmarkAnnotationLine DiffAdd
+" }}}
 if has('nvim')
 " hrsh7th/nvim-cmp {{{
 call sonokai#highlight('CmpItemAbbrMatch', s:palette.green, s:palette.none, 'bold')
 call sonokai#highlight('CmpItemAbbrMatchFuzzy', s:palette.green, s:palette.none, 'bold')
 highlight! link CmpItemAbbr Fg
-highlight! link CmpItemAbbrDeprecated Fg
+highlight! link CmpItemAbbrDeprecated Grey
 highlight! link CmpItemMenu Fg
 highlight! link CmpItemKind Blue
 highlight! link CmpItemKindText Fg
@@ -908,8 +1011,16 @@ call sonokai#highlight('LspFloatWinBorder', s:palette.bg0, s:palette.bg0)
 call sonokai#highlight('LspSagaDiagnosticHeader', s:palette.orange, s:palette.none, 'bold')
 call sonokai#highlight('LspSagaCodeActionTitle', s:palette.blue, s:palette.none, 'bold')
 call sonokai#highlight('DefinitionPreviewTitle', s:palette.purple, s:palette.none, 'bold')
+highlight! link LspSagaDiagnosticError Red
+highlight! link LspSagaDiagnosticWarn Yellow
+highlight! link LspSagaDiagnosticInfo Blue
+highlight! link LspSagaDiagnosticHint Green
+highlight! link LspSagaErrorTrunCateLine LspSagaDiagnosticError
+highlight! link LspSagaWarnTrunCateLine LspSagaDiagnosticWarn
+highlight! link LspSagaInfoTrunCateLine LspSagaDiagnosticInfo
+highlight! link LspSagaHintTrunCateLine LspSagaDiagnosticHint
+highlight! link LspSagaDiagnosticSource Orange
 highlight! link LspSagaDiagnosticBorder Orange
-highlight! link LspSagaDiagnosticTruncateLine Orange
 highlight! link LspSagaRenameBorder Blue
 highlight! link LspSagaRenamePromptPrefix Red
 highlight! link LspSagaCodeActionBorder Blue
@@ -1945,7 +2056,7 @@ highlight! link AutoType TSType
 " vim-lsp-cxx-highlight https://github.com/jackguo380/vim-lsp-cxx-highlight{{{
 highlight! link LspCxxHlSkippedRegion Grey
 highlight! link LspCxxHlSkippedRegionBeginEnd TSKeyword
-highlight! link LspCxxHlGroupEnumConstant TSStructure
+highlight! link LspCxxHlGroupEnumConstant OrangeItalic
 highlight! link LspCxxHlGroupNamespace TSNamespace
 highlight! link LspCxxHlGroupMemberVariable TSVariable
 " }}}
