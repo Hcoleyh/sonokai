@@ -10,7 +10,7 @@
 let s:configuration = sonokai#get_configuration()
 let s:palette = sonokai#get_palette(s:configuration.style, s:configuration.colors_override)
 let s:path = expand('<sfile>:p') " the path of this script
-let s:last_modified = 'Fri Sep  9 13:50:03 UTC 2022'
+let s:last_modified = 'Mon Nov 21 06:21:11 AM UTC 2022'
 let g:sonokai_loaded_file_types = []
 
 if !(exists('g:colors_name') && g:colors_name ==# 'sonokai' && s:configuration.better_performance)
@@ -376,96 +376,147 @@ highlight! link TSAnnotation BlueItalic
 highlight! link TSAttribute BlueItalic
 highlight! link TSBoolean Purple
 highlight! link TSCharacter Yellow
+highlight! link TSCharacterSpecial SpecialChar
 highlight! link TSComment Comment
 highlight! link TSConditional Red
-highlight! link TSConstBuiltin OrangeItalic
-highlight! link TSConstMacro OrangeItalic
-highlight! link TSConstant OrangeItalic
+highlight! link TSConstBuiltin PurpleItalic
+highlight! link TSConstMacro PurpleItalic
+highlight! link TSConstant Fg
 highlight! link TSConstructor Green
+highlight! link TSDebug Debug
+highlight! link TSDefine Define
+highlight! link TSEnvironment Macro
+highlight! link TSEnvironmentName Type
+highlight! link TSError Error
 highlight! link TSException Red
-highlight! link TSField Green
+highlight! link TSField Orange
 highlight! link TSFloat Purple
 highlight! link TSFuncBuiltin Green
 highlight! link TSFuncMacro Green
 highlight! link TSFunction Green
+highlight! link TSFunctionCall Green
 highlight! link TSInclude Red
 highlight! link TSKeyword Red
 highlight! link TSKeywordFunction Red
 highlight! link TSKeywordOperator Red
+highlight! link TSKeywordReturn Red
 highlight! link TSLabel Red
+highlight! link TSLiteral String
+highlight! link TSMath Yellow
 highlight! link TSMethod Green
+highlight! link TSMethodCall Green
 highlight! link TSNamespace BlueItalic
 highlight! link TSNone Fg
 highlight! link TSNumber Purple
 highlight! link TSOperator Red
 highlight! link TSParameter Fg
 highlight! link TSParameterReference Fg
-highlight! link TSProperty Fg
+highlight! link TSPreProc PreProc
+highlight! link TSProperty Orange
 highlight! link TSPunctBracket Grey
 highlight! link TSPunctDelimiter Grey
 highlight! link TSPunctSpecial Yellow
 highlight! link TSRepeat Red
 highlight! link TSStorageClass Red
+highlight! link TSStorageClassLifetime Red
+highlight! link TSStrike Grey
 highlight! link TSString Yellow
 highlight! link TSStringEscape Green
 highlight! link TSStringRegex Green
+highlight! link TSStringSpecial SpecialChar
 highlight! link TSSymbol Fg
 highlight! link TSTag BlueItalic
+highlight! link TSTagAttribute Green
 highlight! link TSTagDelimiter Red
 highlight! link TSText Green
-highlight! link TSStrike Grey
-highlight! link TSMath Yellow
+highlight! link TSTextReference Constant
+highlight! link TSTitle Title
+highlight! link TSTodo Todo
 highlight! link TSType BlueItalic
 highlight! link TSTypeBuiltin BlueItalic
+highlight! link TSTypeDefinition Red
+highlight! link TSTypeQualifier Red
 highlight! link TSURI markdownUrl
 highlight! link TSVariable Fg
-highlight! link TSVariableBuiltin OrangeItalic
+highlight! link TSVariableBuiltin PurpleItalic
 if has('nvim-0.8.0')
   highlight! link @annotation TSAnnotation
   highlight! link @attribute TSAttribute
   highlight! link @boolean TSBoolean
   highlight! link @character TSCharacter
+  highlight! link @character.special TSCharacterSpecial
   highlight! link @comment TSComment
+  highlight! link @conceal Grey
   highlight! link @conditional TSConditional
   highlight! link @constant TSConstant
   highlight! link @constant.builtin TSConstBuiltin
   highlight! link @constant.macro TSConstMacro
   highlight! link @constructor TSConstructor
+  highlight! link @debug TSDebug
+  highlight! link @define TSDefine
+  highlight! link @error TSError
   highlight! link @exception TSException
   highlight! link @field TSField
   highlight! link @float TSFloat
   highlight! link @function TSFunction
   highlight! link @function.builtin TSFuncBuiltin
+  highlight! link @function.call TSFunctionCall
   highlight! link @function.macro TSFuncMacro
   highlight! link @include TSInclude
   highlight! link @keyword TSKeyword
   highlight! link @keyword.function TSKeywordFunction
   highlight! link @keyword.operator TSKeywordOperator
+  highlight! link @keyword.return TSKeywordReturn
   highlight! link @label TSLabel
+  highlight! link @math TSMath
   highlight! link @method TSMethod
+  highlight! link @method.call TSMethodCall
   highlight! link @namespace TSNamespace
   highlight! link @none TSNone
   highlight! link @number TSNumber
   highlight! link @operator TSOperator
   highlight! link @parameter TSParameter
   highlight! link @parameter.reference TSParameterReference
+  highlight! link @preproc TSPreProc
   highlight! link @property TSProperty
   highlight! link @punctuation.bracket TSPunctBracket
   highlight! link @punctuation.delimiter TSPunctDelimiter
   highlight! link @punctuation.special TSPunctSpecial
   highlight! link @repeat TSRepeat
   highlight! link @storageclass TSStorageClass
+  highlight! link @storageclass.lifetime TSStorageClassLifetime
+  highlight! link @strike TSStrike
   highlight! link @string TSString
   highlight! link @string.escape TSStringEscape
   highlight! link @string.regex TSStringRegex
+  highlight! link @string.special TSStringSpecial
   highlight! link @symbol TSSymbol
   highlight! link @tag TSTag
+  highlight! link @tag.attribute TSTagAttribute
   highlight! link @tag.delimiter TSTagDelimiter
   highlight! link @text TSText
-  highlight! link @strike TSStrike
-  highlight! link @math TSMath
+  highlight! link @text.danger TSDanger
+  highlight! link @text.diff.add diffAdded
+  highlight! link @text.diff.delete diffRemoved
+  highlight! link @text.emphasis TSEmphasis
+  highlight! link @text.environment TSEnvironment
+  highlight! link @text.environment.name TSEnvironmentName
+  highlight! link @text.literal TSLiteral
+  highlight! link @text.math TSMath
+  highlight! link @text.note TSNote
+  highlight! link @text.reference TSTextReference
+  highlight! link @text.strike TSStrike
+  highlight! link @text.strong TSStrong
+  highlight! link @text.title TSTitle
+  highlight! link @text.todo TSTodo
+  highlight! link @text.underline TSUnderline
+  highlight! link @text.uri TSURI
+  highlight! link @text.warning TSWarning
+  highlight! link @todo TSTodo
   highlight! link @type TSType
   highlight! link @type.builtin TSTypeBuiltin
+  highlight! link @type.definition TSTypeDefinition
+  highlight! link @type.qualifier TSTypeQualifier
   highlight! link @uri TSURI
   highlight! link @variable TSVariable
   highlight! link @variable.builtin TSVariableBuiltin
@@ -493,7 +544,7 @@ highlight! link CocSemInterface TSType
 highlight! link CocSemStruct TSType
 highlight! link CocSemTypeParameter TSType
 highlight! link CocSemVariable TSVariable
-highlight! link CocSemEnumMember TSVariableBuiltin
+highlight! link CocSemEnumMember TSProperty
 highlight! link CocSemEvent TSLabel
 highlight! link CocSemModifier TSOperator
 highlight! link CocErrorFloat ErrorFloat
@@ -555,7 +606,7 @@ highlight! link LspSemanticTypeParameter TSType
 highlight! link LspSemanticParameter TSParameter
 highlight! link LspSemanticVariable TSVariable
 highlight! link LspSemanticProperty TSProperty
-highlight! link LspSemanticEnumMember TSVariableBuiltin
+highlight! link LspSemanticEnumMember TSProperty
 highlight! link LspSemanticEvents TSLabel
 highlight! link LspSemanticFunction TSFunction
 highlight! link LspSemanticMethod TSMethod
@@ -939,10 +990,10 @@ highlight! link HopNextKey2 Blue
 highlight! link HopUnmatched Grey
 " }}}
 " lukas-reineke/indent-blankline.nvim {{{
-highlight! link IndentBlanklineChar Conceal
-highlight! link IndentBlanklineSpaceChar Conceal
-highlight! link IndentBlanklineSpaceCharBlankline Conceal
-highlight! link IndentBlanklineContextChar Grey
+call sonokai#highlight('IndentBlanklineContextChar', s:palette.grey, s:palette.none, 'nocombine')
+call sonokai#highlight('IndentBlanklineChar', s:palette.grey_dim, s:palette.none, 'nocombine')
+highlight! link IndentBlanklineSpaceChar IndentBlanklineChar
+highlight! link IndentBlanklineSpaceCharBlankline IndentBlanklineChar
 " }}}
 " p00f/nvim-ts-rainbow {{{
 highlight! link rainbowcol1 Red
@@ -954,23 +1005,23 @@ highlight! link rainbowcol6 Purple
 highlight! link rainbowcol7 Green
 " }}}
 " romgrk/barbar.nvim {{{
-call sonokai#highlight('BufferCurrent', s:palette.fg, s:palette.bg4)
-call sonokai#highlight('BufferCurrentIndex', s:palette.fg, s:palette.bg4)
-call sonokai#highlight('BufferCurrentMod', s:palette.blue, s:palette.bg4)
-call sonokai#highlight('BufferCurrentSign', s:palette.red, s:palette.bg4)
-call sonokai#highlight('BufferCurrentTarget', s:palette.red, s:palette.bg4, 'bold')
-call sonokai#highlight('BufferVisible', s:palette.fg, s:palette.bg2)
-call sonokai#highlight('BufferVisibleIndex', s:palette.fg, s:palette.bg2)
-call sonokai#highlight('BufferVisibleMod', s:palette.blue, s:palette.bg2)
-call sonokai#highlight('BufferVisibleSign', s:palette.red, s:palette.bg2)
-call sonokai#highlight('BufferVisibleTarget', s:palette.yellow, s:palette.bg2, 'bold')
-call sonokai#highlight('BufferInactive', s:palette.grey, s:palette.bg2)
-call sonokai#highlight('BufferInactiveIndex', s:palette.grey, s:palette.bg2)
-call sonokai#highlight('BufferInactiveMod', s:palette.grey, s:palette.bg2)
-call sonokai#highlight('BufferInactiveSign', s:palette.grey_dim, s:palette.bg2)
-call sonokai#highlight('BufferInactiveTarget', s:palette.yellow, s:palette.bg2, 'bold')
-call sonokai#highlight('BufferTabpages', s:palette.bg0, s:palette.blue, 'bold')
-call sonokai#highlight('BufferTabpageFill', s:palette.bg0, s:palette.bg0)
+call sonokai#highlight('BufferCurrent', s:palette.fg, s:palette.bg0)
+call sonokai#highlight('BufferCurrentIndex', s:palette.fg, s:palette.bg0)
+call sonokai#highlight('BufferCurrentMod', s:palette.blue, s:palette.bg0)
+call sonokai#highlight('BufferCurrentSign', s:palette.red, s:palette.bg0)
+call sonokai#highlight('BufferCurrentTarget', s:palette.red, s:palette.bg0, 'bold')
+call sonokai#highlight('BufferVisible', s:palette.fg, s:palette.bg_dim)
+call sonokai#highlight('BufferVisibleIndex', s:palette.fg, s:palette.bg_dim)
+call sonokai#highlight('BufferVisibleMod', s:palette.blue, s:palette.bg_dim)
+call sonokai#highlight('BufferVisibleSign', s:palette.red, s:palette.bg_dim)
+call sonokai#highlight('BufferVisibleTarget', s:palette.yellow, s:palette.bg_dim, 'bold')
+call sonokai#highlight('BufferInactive', s:palette.grey, s:palette.bg_dim)
+call sonokai#highlight('BufferInactiveIndex', s:palette.grey, s:palette.bg_dim)
+call sonokai#highlight('BufferInactiveMod', s:palette.grey, s:palette.bg_dim)
+call sonokai#highlight('BufferInactiveSign', s:palette.grey_dim, s:palette.bg_dim)
+call sonokai#highlight('BufferInactiveTarget', s:palette.yellow, s:palette.bg_dim, 'bold')
+call sonokai#highlight('BufferTabpages', s:palette.grey, s:palette.bg_dim, 'bold')
+call sonokai#highlight('BufferTabpageFill', s:palette.bg_dim, s:palette.bg_dim)
 " }}}
 " rcarriga/nvim-notify {{{
 highlight! link NotifyERRORBorder Red
@@ -1324,6 +1375,12 @@ highlight! link DirvishArg Yellow
 " syn_end }}}
 " syn_begin: NvimTree {{{
 " https://github.com/kyazdani42/nvim-tree.lua
+if !s:configuration.transparent_background
+  call sonokai#highlight('NvimTreeNormal', s:palette.fg, s:palette.bg_dim)
+  call sonokai#highlight('NvimTreeEndOfBuffer', s:palette.bg_dim, s:palette.bg_dim)
+  call sonokai#highlight('NvimTreeVertSplit', s:palette.bg0, s:palette.bg0)
+  call sonokai#highlight('NvimTreeCursorLine', s:palette.none, s:palette.bg0)
+endif
 highlight! link NvimTreeSymlink Fg
 highlight! link NvimTreeFolderName Green
 highlight! link NvimTreeRootFolder Grey
@@ -1359,6 +1416,27 @@ highlight! link FernBranchSymbol FernBranchText
 highlight! link FernBranchText Green
 highlight! link FernWindowSelectIndicator TabLineSel
 highlight! link FernWindowSelectStatusLine TabLine
+" syn_end }}}
+" syn_begin: neo-tree {{{
+" https://github.com/nvim-neo-tree/neo-tree.nvim
+if !s:configuration.transparent_background
+  call sonokai#highlight('NeoTreeNormal', s:palette.fg, s:palette.bg_dim)
+  call sonokai#highlight('NeoTreeEndOfBuffer', s:palette.bg_dim, s:palette.bg_dim)
+  call sonokai#highlight('NeoTreeVertSplit', s:palette.bg0, s:palette.bg0)
+endif
+highlight! link NeoTreeGitAdded Green
+highlight! link NeoTreeGitConflict Yellow
+highlight! link NeoTreeGitDeleted Red
+highlight! link NeoTreeGitIgnored Grey
+highlight! link NeoTreeGitModified Blue
+highlight! link NeoTreeGitUnstaged Purple
+highlight! link NeoTreeGitUntracked Fg
+highlight! link NeoTreeGitStaged Purple
+highlight! link NeoTreeDimText Grey
+highlight! link NeoTreeIndentMarker NonText
+highlight! link NeoTreeNormalNC NeoTreeNormal
+highlight! link NeoTreeSignColumn NeoTreeNormal
+highlight! link NeoTreeRootName Title
 " syn_end }}}
 " syn_begin: octo {{{
 " https://github.com/pwntester/octo.nvim
